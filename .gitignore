@@ -22,3 +22,10 @@ tmp/
 # Output  
 outputs/  
 output/  
+
+# Output - logs e metrics (gerados dinamicamente)
+output_rag/logs/
+output_rag/metrics/
+
+# MAS NÃO IGNORAR:
+# output_rag/vector_store/  ← NÃO colocar esta linha!

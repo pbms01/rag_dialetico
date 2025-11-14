@@ -26,7 +26,46 @@ class Config:
     BASE_DIR = Path(r"c:\users\pbm_s\onedrive\rag pimenta")
     
     # Vector Store
-    VECTOR_STORE_DIR = BASE_DIR / "output_rag" / "vector_store"
+from pathlib import Path
+import os
+import streamlit as st
+
+class Config:
+    # Diretório base do projeto
+    BASE_DIR = Path(__file__).parent.parent
+    
+    # Output RAG (estrutura completa)
+    OUTPUT_RAG_DIR = BASE_DIR / "output_rag"
+    VECTOR_STORE_DIR = OUTPUT_RAG_DIR / "vector_store"
+    LOGS_DIR = OUTPUT_RAG_DIR / "logs"
+    METRICS_DIR = OUTPUT_RAG_DIR / "metrics"
+    
+    # Criar diretórios necessários (logs e metrics criados dinamicamente)
+    LOGS_DIR.mkdir(parents=True, exist_ok=True)
+    METRICS_DIR.mkdir(parents=True, exist_ok=True)
+    
+    # API Keys
+    ANTHROPIC_API_KEY = (
+        st.secrets.get("ANTHROPIC_API_KEY") if hasattr(st, 'secrets') 
+        else os.getenv("ANTHROPIC_API_KEY")
+    )
+    
+    # ... resto das configurações ...
+    
+    @staticmethod
+    def validar_configuracao():
+        """Valida configuração do sistema"""
+        erros = []
+        
+        # API Key
+        if not Config.ANTHROPIC_API_KEY:
+            erros.append("ANTHROPIC_API_KEY não configurada")
+        
+        # Vector Store (deve existir)
+        if not Config.VECTOR_STORE_DIR.exists():
+            erros.append(f"Vector store não encontrado: {Config.VECTOR_STORE_DIR}")
+        
+        return erros
     
     # Outputs
     OUTPUT_DIR = Path("./outputs")
