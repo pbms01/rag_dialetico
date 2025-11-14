@@ -1,0 +1,36 @@
+# ═══════════════════════════════════════════════════════════════════════════
+# REQUISITOS - SISTEMA RAG GERAÇÃO DE CONTESTAÇÕES
+# ═══════════════════════════════════════════════════════════════════════════
+
+# Environment
+python-dotenv>=1.0.0
+
+# Core RAG
+chromadb>=0.4.22
+sentence-transformers>=2.2.2
+transformers>=4.36.0
+torch>=2.1.0
+
+# LLM
+anthropic>=0.25.0
+
+# Document Processing
+PyPDF2>=3.0.1
+python-docx>=1.1.0
+
+# Interface
+streamlit>=1.32.0
+
+# Utilities
+tiktoken>=0.5.2
+numpy>=1.24.0
+tqdm>=4.66.0
+
+# Optional (para melhor performance)
+# faiss-cpu>=1.7.4  # Se precisar de busca mais rápida
+# onnxruntime>=1.16.0  # Para acelerar inferência de embeddings
+
+# Development
+pytest>=7.4.0
+pytest-cov>=4.1.0
+black>=24.0.0
